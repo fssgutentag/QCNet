@@ -132,9 +132,9 @@ class ArgoverseV2Dataset(Dataset):
         self.vector_repr = vector_repr
         self._url = f'https://s3.amazonaws.com/argoverse/datasets/av2/tars/motion-forecasting/{split}.tar'
         self._num_samples = {
-            'train': 199908,
-            'val': 24988,
-            'test': 24984,
+            'train': 10,
+            'val': 10,
+            'test': 10,
         }[split]
         self._agent_types = ['vehicle', 'pedestrian', 'motorcyclist', 'cyclist', 'bus', 'static', 'background',
                              'construction', 'riderless_bicycle', 'unknown']
@@ -512,6 +512,7 @@ class ArgoverseV2Dataset(Dataset):
 
     def _download(self) -> None:
         # if complete raw/processed files exist, skip downloading
+        a=len(self)
         if ((os.path.isdir(self.raw_dir) and len(self.raw_file_names) == len(self)) or
                 (os.path.isdir(self.processed_dir) and len(self.processed_file_names) == len(self))):
             return
